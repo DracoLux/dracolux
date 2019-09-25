@@ -1,33 +1,34 @@
 package pilot;
 
-import dumb.Coordinate;
+import formation.Coordinate;
 import formation.Formation;
-import timeline.Event;
 
 import java.util.ArrayList;
 import java.util.List;
 
+// Instantiated with a formation.
 public class FormationPilot {
-    private List<NavigationPilot> pilots;
+    private List<NavigationPilot> navigationPilots;
+    private Formation formation;
 
-    public FormationPilot(){
-        this.pilots = new ArrayList<>();
+    public FormationPilot(Formation formation){
+        this.formation = formation;
+        this.navigationPilots = new ArrayList<>();
     }
 
-    public void addPilot(NavigationPilot pilot){
-        pilots.add(pilot);
+    public void addNavigationPilot(NavigationPilot pilot){
+        navigationPilots.add(pilot);
     }
 
-    public void showEvent(Event event){
-        List<Coordinate> coordinates = event.formation.createFormation(pilots.size());
-        for (int i = 0; i < pilots.size(); i++){
-            NavigationPilot pilot = pilots.get(i);
-            pilot.moveTo(coordinates.get(i));
-            pilot.changeLights(event.lightVolume,event.color);
-            pilot.showLightPattern(event.lightPattern);
+    public void runFormation(){
+        List<Coordinate> coordinates = formation.coordinates;
+        for (int i = 0; i < coordinates.size(); i++) {
+            NavigationPilot navigationPilot = navigationPilots.get(i);
+            navigationPilot.moveTo(formation.coordinates.get(i));
+            navigationPilot.showLightPattern(formation.lightPattern, formation.color); // TODO: Different colors in same shape.
             /*TODO: Make sure that the drones do not interfere with each other
-            * TODO: Move drones to the closest point
-            * TODO: Parallelize*/
+             * TODO: Move drones to the closest point
+             * TODO: Parallelize*/
         }
 
     }

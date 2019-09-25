@@ -1,4 +1,4 @@
-package dumb;
+package formation;
 
 public class Coordinate {
     public int x;

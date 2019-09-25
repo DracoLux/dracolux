@@ -1,36 +1,29 @@
 package pilot;
 
 import drone.Drone;
-import dumb.Coordinate;
-import dumb.LightPattern;
+import formation.Coordinate;
+import enumerators.LightPattern;
 
 import java.awt.*;
 
 public class NavigationPilot {
     private Drone drone;
-    private Coordinate currentCoordinate;
+    private Coordinate location;
 
     public NavigationPilot(Drone drone, Coordinate start){
         this.drone = drone;
-        this.currentCoordinate = start;
+        this.location = start;
     }
 
     public void moveTo(Coordinate coordinate){
-        drone.moveX(0); /*TODO: Do some maths here*/
-        drone.moveY(0);
-        drone.moveZ(0);
-
-        currentCoordinate = coordinate;
+        drone.move(coordinate.x, coordinate.y, coordinate.z); /*TODO: Do some maths here*/
+        location = coordinate;
     }
 
-    public void changeLights(int volume, Color color){
-        drone.changeLightVolume(volume);
+    public void showLightPattern(LightPattern pattern, Color color){
         drone.changeLightColor(color);
-    }
-
-    public void showLightPattern(LightPattern pattern){
         switch (pattern) {
-            /*TODO: Make some crazy amazing patterns*/
+            /*TODO: Make some crazy amazing patterns in an async call */
         }
     }
 

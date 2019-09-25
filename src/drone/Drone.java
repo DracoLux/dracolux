@@ -10,11 +10,7 @@ public interface Drone {
 
     void hover();
 
-    void moveX(int x);
-
-    void moveY(int y);
-
-    void moveZ(int z);
+    void move(int x, int y, int z);
 
     void changeLightVolume(int percentage);
 

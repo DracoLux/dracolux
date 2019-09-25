@@ -19,17 +19,7 @@ public class DumbDrone implements Drone {
     }
 
     @Override
-    public void moveX(int x) {
-
-    }
-
-    @Override
-    public void moveY(int y) {
-
-    }
-
-    @Override
-    public void moveZ(int z) {
+    public void move(int x, int y, int z) {
 
     }
 
