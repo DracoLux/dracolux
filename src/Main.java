@@ -1,20 +1,20 @@
-import drone.DumbDrone;
-import formation.Coordinate;
-import enumerators.LightPattern;
-import enumerators.Shape;
-import formation.Formation;
-import formation.FormationGenerator;
-import pilot.CommanderPilot;
-import pilot.NavigationPilot;
-
-import java.awt.*;
-import java.util.*;
-import java.util.List;
+import network.server.Server;
 
 public class Main {
 
     public static void main(String[] args) {
-
+        Server server = new Server(5000);
+        server.start();
+        while (server.getClients().size() < 3){
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            System.out.println("Waiting for connection...");
+        }
+        server.sendToAll("HELLO DRONE");
+        /*
         List<NavigationPilot> navigationPilots = new ArrayList<NavigationPilot>();
         navigationPilots.add(new NavigationPilot(new DumbDrone(), new Coordinate(5, 6, 7)));
         navigationPilots.add(new NavigationPilot(new DumbDrone(), new Coordinate(3, 1, 4)));
@@ -31,7 +31,7 @@ public class Main {
         }
 
         commanderPilot.runFormation();
-
+        */
     }
 
 }
