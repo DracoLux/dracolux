@@ -7,8 +7,7 @@ public class ServerAdapter implements ServerListener {
 
 	@Override
 	public void clientConnected(Server server, Server.ConnectionToClient client) {
-		// TODO Auto-generated method stub
-		
+		System.out.println("Client connected " + client.getClientId());
 	}
 
 	@Override
