@@ -1,5 +1,6 @@
 package network.server;
 
+import network.client.ClientCommand;
 import network.common.Command;
 
 public class ServerAdapter implements ServerListener {
@@ -18,7 +19,7 @@ public class ServerAdapter implements ServerListener {
 
 	@Override
 	public void commandReceived(Server server, Server.ConnectionToClient client, Command cmd) {
-		if (cmd == Command.DISCONNECT) {
+		if (cmd == ClientCommand.DISCONNECT) {
 			client.localShutDown();
 		}
 	}
