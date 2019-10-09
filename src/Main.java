@@ -1,9 +1,10 @@
 import network.server.Server;
+import network.server.ServerAdapter;
 
 public class Main {
 
     public static void main(String[] args) {
-        Server server = new Server(5000);
+        Server server = new Server(5000, new ServerAdapter());
         server.start();
         while (server.getClients().size() < 3){
             try {
