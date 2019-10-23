@@ -41,12 +41,18 @@ public class Main {
         CommanderPilot commanderPilot = new CommanderPilot(navigationPilots);
 
         // Generate formations here arbritarily.
-        for (int i = 0; i < 3; i++) {
-            Formation formation = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.RED, LightPattern.BLINK, i * 2);
-            commanderPilot.addFormation(formation);
-        }
+        Formation formation1 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.RED, LightPattern.BLINK, 2);
+        commanderPilot.addFormation(formation1);
+        Formation formation2 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.CIRCLE, Color.RED, LightPattern.BLINK, 4);
+        commanderPilot.addFormation(formation2);
+        Formation formation3 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.RED, LightPattern.BLINK, 2);
+        commanderPilot.addFormation(formation3);
 
-        commanderPilot.runFormation();
+        try {
+            commanderPilot.runFormation();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 

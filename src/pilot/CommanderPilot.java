@@ -19,7 +19,7 @@ public class CommanderPilot {
         formationQueue.add(formation);
     }
 
-    public void runFormation() {
+    public void runFormation() throws InterruptedException {
         // TODO: Extend functionality for multiple formations at the same time.
         while (formationQueue.peek() != null) {
             Formation nextFormation = formationQueue.poll();
@@ -28,12 +28,6 @@ public class CommanderPilot {
                 formationPilot.addNavigationPilot(navigationPilots.get(i)); // TODO: Hand out work more appropiately. What to do if not enough?
             }
             formationPilot.runFormation();
-
-            try {
-                Thread.sleep(nextFormation.durationSeconds);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
         }
     }
 }
