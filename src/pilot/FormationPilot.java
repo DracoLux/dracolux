@@ -20,7 +20,7 @@ public class FormationPilot {
         navigationPilots.add(pilot);
     }
 
-    public void runFormation(){
+    public void runFormation() throws InterruptedException {
         List<Coordinate> coordinates = formation.coordinates;
         for (int i = 0; i < coordinates.size(); i++) {
             NavigationPilot navigationPilot = navigationPilots.get(i);
@@ -31,6 +31,7 @@ public class FormationPilot {
              * TODO: Parallelize*/
         }
 
+        Thread.sleep(formation.durationSeconds*1000);
     }
 
     // Check if there's an intersection between section c1 to c2 and section c3 to c4.
