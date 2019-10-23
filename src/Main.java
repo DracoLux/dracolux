@@ -20,10 +20,12 @@ public class Main {
         Server server = new Server(5000, new ServerAdapter());
         server.start();
 
-        // Wait for 10 seconds
-        for (int i = 0; i<10; i++)
+        // Wait for drones to connect
+        int numberOfDrones = 10;
+        int i = 0;
+        while (server.getClients().size() < numberOfDrones)
         try {
-            System.out.println(10-i + "...");
+            System.out.println(++i + "...");
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -52,6 +54,8 @@ public class Main {
             commanderPilot.runFormation();
         } catch (InterruptedException e) {
             e.printStackTrace();
+        } finally {
+            server.shutDown();
         }
 
     }
