@@ -2,6 +2,8 @@ package formation;
 
 import enumerators.LightPattern;
 import enumerators.Shape;
+import network.common.Coordinate;
+
 import java.awt.Color;
 import java.util.ArrayList;
 

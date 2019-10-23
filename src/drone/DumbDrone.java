@@ -19,17 +19,13 @@ public class DumbDrone implements Drone {
     }
 
     @Override
-    public void move(int x, int y, int z) {
+    public void move(float x, float y, float z) {
 
     }
 
     @Override
-    public void changeLightVolume(int percentage) {
+    public void changeLight(Color color, int volumePercentage) {
 
     }
 
-    @Override
-    public void changeLightColor(Color color) {
-
-    }
 }

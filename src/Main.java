@@ -1,7 +1,7 @@
 import drone.SimulationDrone;
 import enumerators.LightPattern;
+import network.common.Coordinate;
 import enumerators.Shape;
-import formation.Coordinate;
 import formation.Formation;
 import formation.FormationGenerator;
 import network.server.Server;
@@ -41,11 +41,11 @@ public class Main {
         CommanderPilot commanderPilot = new CommanderPilot(navigationPilots);
 
         // Generate formations here arbitrarily.
-        Formation formation1 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.RED, LightPattern.BLINK, 2);
+        Formation formation1 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.RED, LightPattern.CONSTANT, 2);
         commanderPilot.addFormation(formation1);
-        Formation formation2 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.CIRCLE, Color.RED, LightPattern.BLINK, 4);
+        Formation formation2 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.CIRCLE, Color.YELLOW, LightPattern.BLINK, 4);
         commanderPilot.addFormation(formation2);
-        Formation formation3 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.RED, LightPattern.BLINK, 2);
+        Formation formation3 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.GREEN, LightPattern.BLINK, 2);
         commanderPilot.addFormation(formation3);
 
         try {

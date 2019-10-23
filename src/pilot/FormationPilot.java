@@ -1,7 +1,7 @@
 package pilot;
 
-import formation.Coordinate;
 import formation.Formation;
+import network.common.Coordinate;
 
 import java.util.ArrayList;
 import java.util.List;

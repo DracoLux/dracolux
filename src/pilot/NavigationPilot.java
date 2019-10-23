@@ -1,8 +1,8 @@
 package pilot;
 
 import drone.Drone;
-import formation.Coordinate;
 import enumerators.LightPattern;
+import network.common.Coordinate;
 
 import java.awt.*;
 
@@ -21,9 +21,11 @@ public class NavigationPilot {
     }
 
     public void showLightPattern(LightPattern pattern, Color color){
-        drone.changeLightColor(color);
+        drone.changeLight(color,100);
         switch (pattern) {
             /*TODO: Make some crazy amazing patterns in an async call */
+            case CONSTANT: drone.changeLight(color,100); break;
+            case BLINK: drone.changeLight(color,50); break;
         }
     }
 

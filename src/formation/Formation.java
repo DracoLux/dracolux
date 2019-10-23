@@ -1,6 +1,8 @@
 package formation;
 
+
 import enumerators.LightPattern;
+import network.common.Coordinate;
 
 import java.awt.*;
 import java.util.List;
