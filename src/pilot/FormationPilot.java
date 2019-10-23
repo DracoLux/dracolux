@@ -33,4 +33,28 @@ public class FormationPilot {
 
     }
 
+    // Check if there's an intersection between section c1 to c2 and section c3 to c4.
+    static public boolean checkIntersection(Coordinate c1, Coordinate c2, Coordinate c3, Coordinate c4) {
+        float t, u, denom, nume1, nume2;
+        /* Make use of Bézier parameters to check intersection on section of coordinates from c1 to c2.
+        If it exists within section, it must exist within other section as well.
+         */
+        // First check denominator. If it's 0, the lines are parallel.
+        denom = (c1.x - c2.x) * (c3.y - c4.y) - (c1.y - c2.y) * (c3.x - c4.x);
+        if (denom == 0) {
+            return false;
+        }
+        nume1 = (c1.x - c3.x) * (c3.y - c4.y) - (c1.y - c3.y) * (c3.x - c4.x);
+        t = nume1/denom;
+
+        nume2 = (c1.x - c2.x) * (c1.y - c3.y) - (c1.y - c2.y) * (c1.x - c3.x);
+        nume2 *= -1;
+        u = nume2/denom;
+
+        if ((0f < t && t < 1.0f) && (0f < u && u < 1.0f)) {
+            return true;
+        }
+        return false;
+    }
+
 }
