@@ -40,7 +40,7 @@ public class Main {
         // TODO: This is where shapes and light patterns are decided and generated.
         CommanderPilot commanderPilot = new CommanderPilot(navigationPilots);
 
-        // Generate formations here arbritarily.
+        // Generate formations here arbitrarily.
         Formation formation1 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.RED, LightPattern.BLINK, 2);
         commanderPilot.addFormation(formation1);
         Formation formation2 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.CIRCLE, Color.RED, LightPattern.BLINK, 4);
