@@ -33,30 +33,58 @@ public class FormationGenerator {
 
     private static void buildNumberOne(Formation outputFormation, int numOfDrones) {
         float j;
-        int bottomLine = numOfDrones/3;
+        int specialPoints = 0; // Certain spots that must be occupied.
+        int bottomLine = (numOfDrones - specialPoints)/3;
         int upLine = ((numOfDrones - bottomLine)/4) * 3;
-        int crook = numOfDrones - upLine;
+        int crook = numOfDrones - specialPoints - upLine - bottomLine;
 
         j = 1;
         for (int i = 0; i < bottomLine; i++) {
-            outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(-200, 0, 0), new Coordinate(200, 0, 0), bottomLine, j));
+            outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(-400, 0, 0), new Coordinate(400, 0, 0), bottomLine, j));
             j++;
         }
 
         j = 1;
         for (int i = 0; i < upLine; i++) {
-            outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(0, 0, 0), new Coordinate(0, 1000, 0), upLine, j));
+            outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(0, 0, 0), new Coordinate(0, 1200, 0), upLine, j));
             j++;
         }
 
         j = 1;
         for (int i = 0; i < crook; i++) {
-            outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(0, 1000, 0), new Coordinate(300, 700, 0), crook, j));
+            outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(500, 800, 0), new Coordinate(0, 1200, 0), crook, j));
             j++;
         }
 
-        System.out.println("We built this number one: " + outputFormation.toString());
     }
+
+    /*
+    private static void buildNumberTwo(Formation outputFormation, int numOfDrones) {
+        float j;
+        int upLine = (numOfDrones - specialPoints);
+        int midLine = ((numOfDrones - bottomLine)/4) * 3;
+        int botLine = numOfDrones - specialPoints - upLine - bottomLine;
+
+        j = 1;
+        for (int i = 0; i < bottomLine; i++) {
+            outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(-400, 0, 0), new Coordinate(400, 0, 0), bottomLine, j));
+            j++;
+        }
+
+        j = 1;
+        for (int i = 0; i < upLine; i++) {
+            outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(0, 0, 0), new Coordinate(0, 1200, 0), upLine, j));
+            j++;
+        }
+
+        j = 1;
+        for (int i = 0; i < crook; i++) {
+            outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(500, 800, 0), new Coordinate(0, 1200, 0), crook, j));
+            j++;
+        }
+
+    }
+     */
 
     private static void buildLine(Formation outputFormation, int n) {
         float j = 1;
@@ -79,7 +107,6 @@ public class FormationGenerator {
             z = (float) (k + sin(theta) * r);
             outputFormation.coordinates.add(new Coordinate(x, y, z));
         }
-        System.out.println("We build this circle on rock and roll: " + outputFormation.toString());
     }
 
     private static void buildSquare(Formation outputFormation, int n) {
@@ -110,7 +137,7 @@ public class FormationGenerator {
                         outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(0, 300, 0), new Coordinate(0, 300, 800), h/4, j));
                         break;
                     case 1:
-                        outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(800, 300, 0), new Coordinate(0, 300, 800), h/4, j));
+                        outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(800, 300, 0), new Coordinate(800, 300, 800), h/4, j));
                         break;
                     case 2:
                         outputFormation.coordinates.add(sitBetweenCoordinates(new Coordinate(0, 300, 0), new Coordinate(800, 300, 0), h/4, j));
@@ -127,23 +154,28 @@ public class FormationGenerator {
 
     // Returns float for 'iteration' to sit on a line between floats from and to where numDrones number of drones are gonna be.
     public static float sitOnLine(float from, float to, float numDrones, float iteration) {
-        return from + (to/(numDrones + 1) * iteration);
+        float x = (to - from)/(numDrones + 1);
+        return from + x * (iteration);
     }
 
     public static Coordinate sitBetweenCoordinates(Coordinate from, Coordinate to, float numDrones, float iteration) {
         float x, y, z;
+
         if (from.x == to.x)
             x = from.x;
         else
             x = sitOnLine(from.x, to.x, numDrones, iteration);
+
         if (from.y == to.y)
             y = from.y;
         else
             y = sitOnLine(from.y, to.y, numDrones, iteration);
+
         if (from.z == to.z)
             z = from.z;
         else
             z = sitOnLine(from.z, to.z, numDrones, iteration);
+
         return new Coordinate(x, y, z);
     }
 }

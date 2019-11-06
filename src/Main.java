@@ -44,9 +44,9 @@ public class Main {
         CommanderPilot commanderPilot = new CommanderPilot(navigationPilots);
 
         // Generate formations here arbitrarily.
-        Formation formation1 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.CIRCLE, Color.PINK, LightPattern.CONSTANT, 8);
+        Formation formation1 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.LINE, Color.PINK, LightPattern.CONSTANT, 4);
         commanderPilot.addFormation(formation1);
-        Formation formation2 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.NUMBER_ONE, Color.YELLOW, LightPattern.BLINK, 8);
+        Formation formation2 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.YELLOW, LightPattern.BLINK, 10);
         commanderPilot.addFormation(formation2);
         Formation formation3 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.NUMBER_ONE, Color.GREEN, LightPattern.BLINK, 8);
         commanderPilot.addFormation(formation3);
