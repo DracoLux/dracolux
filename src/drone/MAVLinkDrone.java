@@ -1,7 +1,10 @@
 package drone;
 
 import io.dronefleet.mavlink.MavlinkConnection;
+import io.dronefleet.mavlink.MavlinkMessage;
 import io.dronefleet.mavlink.common.CommandInt;
+import io.dronefleet.mavlink.common.GlobalPositionInt;
+import network.common.Coordinate;
 
 import java.awt.*;
 import java.io.IOException;
@@ -77,5 +80,16 @@ public class MAVLinkDrone implements Drone {
     @Override
     public void changeLight(Color color, int volumePercentage) {
 
+    }
+
+    public Coordinate getCoordinates() throws IOException {
+        MavlinkMessage msg;
+        do {
+            msg = connection.next();
+            if (msg == null) continue;
+            if (!(msg.getPayload() instanceof GlobalPositionInt)) continue; // skip message
+            GlobalPositionInt position = (GlobalPositionInt) msg.getPayload();
+            return new Coordinate(position.lat(), position.alt(), position.lon());
+        } while (true);
     }
 }
