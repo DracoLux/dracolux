@@ -38,16 +38,17 @@ public class Main {
             int id = c.getClientId();
             navigationPilots.add(new NavigationPilot(new SimulationDrone(id, server), new Coordinate(0, 0, 0)));
         }
+        System.out.println("We received " + navigationPilots.size() + " drones.");
 
         // TODO: This is where shapes and light patterns are decided and generated.
         CommanderPilot commanderPilot = new CommanderPilot(navigationPilots);
 
         // Generate formations here arbitrarily.
-        Formation formation1 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.RED, LightPattern.CONSTANT, 2);
+        Formation formation1 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.CIRCLE, Color.PINK, LightPattern.CONSTANT, 8);
         commanderPilot.addFormation(formation1);
-        Formation formation2 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.CIRCLE, Color.YELLOW, LightPattern.BLINK, 4);
+        Formation formation2 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.NUMBER_ONE, Color.YELLOW, LightPattern.BLINK, 8);
         commanderPilot.addFormation(formation2);
-        Formation formation3 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.SQUARE, Color.GREEN, LightPattern.BLINK, 2);
+        Formation formation3 = FormationGenerator.generateFormation(navigationPilots.size(), Shape.NUMBER_ONE, Color.GREEN, LightPattern.BLINK, 8);
         commanderPilot.addFormation(formation3);
 
         try {

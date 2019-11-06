@@ -5,6 +5,7 @@ public enum Shape {
     CIRCLE,
     NUMBER_ONE,
     NUMBER_TWO,
-    NUMBER_THREE
+    NUMBER_THREE,
+    LINE;
     // TODO: Etcetera
 }
