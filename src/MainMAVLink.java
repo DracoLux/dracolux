@@ -1,3 +1,4 @@
+import drone.MAVLinkDrone;
 import io.dronefleet.mavlink.Mavlink2Message;
 import io.dronefleet.mavlink.MavlinkConnection;
 import io.dronefleet.mavlink.MavlinkMessage;
@@ -15,17 +16,15 @@ import java.net.Socket;
 public class MainMAVLink {
     public static void main(String[] args) {
         // This example uses a TCP socket, however we may also use a UDP socket by injecting
-// PipedInputStream/PipedOutputStream to MavlinkConnection, or even USB by using any
-// implementation that will eventually yield an InputStream and an OutputStream.
+        // PipedInputStream/PipedOutputStream to MavlinkConnection, or even USB by using any
+        // implementation that will eventually yield an InputStream and an OutputStream.
         try (Socket socket = new Socket("127.0.0.1", 5000)) {
             // After establishing a connection, we proceed to building a MavlinkConnection instance.
-            MavlinkConnection connection = MavlinkConnection.create(
-                    socket.getInputStream(),
-                    socket.getOutputStream());
+            MAVLinkDrone drone = new MAVLinkDrone(0,0,socket);
 
             // Now we are ready to read and send messages.
             MavlinkMessage message;
-            while ((message = connection.next()) != null) {
+            while ((message = drone.getConnection().next()) != null) {
                 // The received message could be either a Mavlink1 message, or a Mavlink2 message.
                 // To check if the message is a Mavlink2 message, we could do the following:
                 if (message instanceof Mavlink2Message) {
