@@ -21,7 +21,7 @@ public class Main {
         server.start();
 
         // Wait for drones to connect
-        int numberOfDrones = 10;
+        int numberOfDrones = 30;
         int i = 0;
         while (server.getClients().size() < numberOfDrones)
         try {
