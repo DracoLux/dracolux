@@ -11,7 +11,7 @@ import pilot.CommanderPilot;
 import pilot.NavigationPilot;
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -75,22 +75,17 @@ public class Main {
     }
 
     private static List<NavigationPilot> useArdupilot() {
-        try (Socket socket = new Socket("127.0.0.1", 5000)) {
-            // After establishing a connection, we proceed to building a MavlinkConnection instance.
+        List<NavigationPilot> navigationPilots = new ArrayList<>();
 
-            List<NavigationPilot> navigationPilots = new ArrayList<>();
-
-            for (int i = 0; i < 1; i++) {
-                MAVLinkDrone drone = new MAVLinkDrone(i, 0, socket);
-                Coordinate coordinate = drone.getCoordinates();
-                navigationPilots.add(new NavigationPilot(drone, coordinate));
-            }
-
-            return navigationPilots;
+        try (Socket socket = new Socket("127.0.0.1", 5760)){
+            MAVLinkDrone drone = new MAVLinkDrone(1, 0, socket.getInputStream(), socket.getOutputStream());
+            Coordinate coordinate = drone.getCoordinates();
+            navigationPilots.add(new NavigationPilot(drone, coordinate));
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return null;
+
+        return navigationPilots;
     }
 
 }

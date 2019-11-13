@@ -2,12 +2,11 @@ package drone;
 
 import io.dronefleet.mavlink.MavlinkConnection;
 import io.dronefleet.mavlink.MavlinkMessage;
-import io.dronefleet.mavlink.common.CommandInt;
-import io.dronefleet.mavlink.common.GlobalPositionInt;
+import io.dronefleet.mavlink.common.*;
 import network.common.Coordinate;
 
 import java.awt.*;
-import java.io.IOException;
+import java.io.*;
 import java.net.Socket;
 
 import static io.dronefleet.mavlink.common.MavCmd.*;
@@ -17,19 +16,23 @@ public class MAVLinkDrone implements Drone {
     private int componentId;
     private MavlinkConnection connection;
 
-    public MAVLinkDrone(int systemId, int componentId, Socket socket) throws IOException {
+    public MAVLinkDrone(int systemId, int componentId, InputStream inputStream, OutputStream outputStream) throws IOException {
         this.systemId = systemId;
         this.componentId = componentId;
-        connection = MavlinkConnection.create(
-                socket.getInputStream(),
-                socket.getOutputStream());
+        connection = MavlinkConnection.create(inputStream, outputStream);
+
+        connection.send2(
+                255,
+                0,
+                Heartbeat.builder()
+                    .type(MavType.MAV_TYPE_GCS)
+                    .autopilot(MavAutopilot.MAV_AUTOPILOT_INVALID)
+                    .systemStatus(MavState.MAV_STATE_UNINIT)
+                    .mavlinkVersion(3)
+                    .build());
     }
 
-    public MavlinkConnection getConnection() {
-        return connection;
-    }
-
-    private void sendCommand(CommandInt cmd){
+    private void sendCommand(Object cmd){
         try {
             connection.send2(systemId,componentId,cmd);
         } catch (IOException e) {
