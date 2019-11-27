@@ -16,11 +16,12 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Scanner;
 
 public class Main {
 
     public static void main(String[] args) {
-        boolean useRealDrone = true;
+        boolean useRealDrone = isRealDroneUsed();
         List<NavigationPilot> navigationPilots;
 
         if (useRealDrone){
@@ -46,6 +47,24 @@ public class Main {
             e.printStackTrace();
         }
 
+    }
+
+    private static boolean isRealDroneUsed() {
+        Scanner scanner = new Scanner(System.in);
+        String answer;
+
+        do {
+            System.out.println("Are you using a physical drone? [y/n]");
+            answer = scanner.nextLine();
+        }
+        while (!(answer.equals("y") || answer.equals("n")));
+
+        if (answer.equals("n")){
+            System.out.println("Please start your simulation program");
+            return false;
+        } else {
+            return true;
+        }
     }
 
     private static List<NavigationPilot> useSimulation(){
