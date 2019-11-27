@@ -19,4 +19,14 @@ public class Formation {
         this.color = color;
         this.durationSeconds = durationSeconds;
     }
+
+    public String toString() {
+        String output = "Formation";
+        output += "\nCoordinates: " + coordinates;
+        output += "\nCoordinates size: " + coordinates.size();
+        output += "\nLightpattern: " + lightPattern;
+        output += "\nColor: " + color;
+        output += "\nDuration: " + durationSeconds;
+        return output;
+    }
 }
